@@ -176,7 +176,27 @@
   =================================================== */
   if (contactForm) {
     contactForm.addEventListener('submit', function (e) {
-      e.preventDefault();
+      contactForm.addEventListener('submit', function (e) {
+
+  const nameInput  = document.getElementById('name');
+  const phoneInput = document.getElementById('phone');
+
+  let valid = true;
+
+  if (!nameInput.value.trim() || nameInput.value.trim().length < 2) {
+    valid = false;
+  }
+
+  const phoneVal = phoneInput.value.trim().replace(/[\s\-]/g, '');
+  const phoneRegex = /^(\+91)?[6-9]\d{9}$/;
+  if (!phoneRegex.test(phoneVal)) {
+    valid = false;
+  }
+
+  if (!valid) {
+    e.preventDefault(); // only block if invalid
+  }
+});
 
       const nameInput  = document.getElementById('name');
       const phoneInput = document.getElementById('phone');
